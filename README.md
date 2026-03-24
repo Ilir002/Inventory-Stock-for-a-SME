@@ -117,7 +117,7 @@ Generated outputs:
 
 ```
 Invetory Stock Web App/
-├── app.py                  # application entry point
+├── app.py                 # application entry point
 ├── routes/                # application routes (views/controllers)
 ├── models/                # database models
 ├── templates/             # HTML templates
