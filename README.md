@@ -31,12 +31,13 @@ If stock levels fall below a defined threshold, the user is notified immediately
 ### User Stories
 
 * As a user, I want to add new stock to the inventory, so I can keep the inventory up to date.
-* As a user, I want to delete stock from the inventory if I made a mistake or if the stock is no longer needed.
-* As a user, I want to receive reports to track inventory changes (daily, weekly, monthly, yearly).
-* As a user, I want to manage categories (add, modify, delete) to customize my inventory structure.
-* As a user, I want to be notified when stock is low, so I don’t need to monitor it manually.
-* As a user, I want a clear and intuitive dashboard to improve efficiency.
 * As a user, I want to upload receipts corresponding to stock increases for record-keeping.
+* As a user, I want to delete stock from the inventory if stock has expired or no longer needed.
+* As a user, I want to receive reports to track inventory changes (daily, weekly, monthly, yearly).
+* As a user, I want to manage categories by adding to customize my inventory structure.
+* As a user, I want to manage categories by modifying to customize my inventory structure.
+* As a user, I want to be notified when stock is below threshold, so I don’t need to monitor it manually.
+* As a user, I want to be able to register and log into the web application for authentication.
 
 ---
 
