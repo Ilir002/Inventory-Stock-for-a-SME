@@ -172,6 +172,6 @@ All team members contributed collaboratively to the project:
 
 ## 📄 License
 
-This project is provided for educational purposes as part of the Programming Foundations module.
+This project is provided for educational purposes as part of the Advanced Programming module.
 
 MIT License.
