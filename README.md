@@ -172,6 +172,6 @@ All team members contributed collaboratively to the project:
 
 ## 📄 License
 
-This project is provided for educational purposes as part of the Advanced Programming module.
+This project is provided for educational purposes as part of the Advanced Programming module at FHNW.
 
 MIT License.
