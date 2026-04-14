@@ -19,7 +19,7 @@ The user can:
 
 * Add new stock when items are purchased or received
 * Remove stock if items are sold, damaged, or incorrectly recorded
-* Upload receipts as proof of stock additions
+* Upload invoices as proof of stock additions
 * Organize items into categories
 
 The system automatically tracks all inventory changes and generates reports over different time periods (daily, weekly, monthly, yearly).
@@ -31,12 +31,12 @@ If stock levels fall below a defined threshold, the user is notified immediately
 ### User Stories
 
 * As a user, I want to add a new product to the inventory, so I can keep the inventory up to date.
-* As a user, I want to upload receipts corresponding to product increases for record-keeping.
-* As a user, I want to delete stock from the inventory if product has expired or no longer needed.
-* As a user, I want to receive reports to track inventory changes (daily, weekly, monthly, yearly).
+* As a user, I want to upload invoices corresponding to product increases for record-keeping.
+* As a user, I want to delete stock from the inventory if product is no longer needed.
+* As a user, I want to receive reports to track inventory changes.
 * As a user, I want to manage categories by adding to customize my inventory structure.
 * As a user, I want to manage categories by modifying to customize my inventory structure.
-* As a user, I want to be notified when stock is below threshold, so I don’t need to monitor it manually.
+* As a user, I want to be notified when stock is below threshold, so I do not need to monitor it manually.
 
 ---
 
