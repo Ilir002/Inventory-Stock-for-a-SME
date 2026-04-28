@@ -23,6 +23,11 @@ class TestCategoryCreateRequest:
         request = CategoryCreateRequest(name="  Electronics  ", taxes=0.0)
         assert request.name == "Electronics"
 
+    def test_trimmed_name_too_short(self) -> None:
+        """Test that trimming still enforces minimum length."""
+        with pytest.raises(ValidationError):
+            CategoryCreateRequest(name="  A  ", taxes=0.0)
+
     def test_name_too_short(self) -> None:
         """Test validation of short names."""
         with pytest.raises(ValidationError) as exc_info:
@@ -106,6 +111,11 @@ class TestCategoryUpdateRequest:
         """Test that name is stripped."""
         request = CategoryUpdateRequest(name="  NewName  ", taxes=None)
         assert request.name == "NewName"
+
+    def test_trimmed_name_too_short(self) -> None:
+        """Test that trimming still enforces minimum length."""
+        with pytest.raises(ValidationError):
+            CategoryUpdateRequest(name="  A  ", taxes=None)
 
 
 class TestCategorySchema:

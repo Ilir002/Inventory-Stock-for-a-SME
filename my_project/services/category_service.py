@@ -63,8 +63,7 @@ class CategoryService:
         Returns:
             List of CategorySchema objects
         """
-        categories = self.dao.get_all()
-        return [self._to_schema(cat) for cat in categories]
+        return self._to_schemas(self.dao.get_all())
 
     def update_category(self, category_id: int, name: Optional[str] = None, taxes: Optional[float] = None) -> Optional[CategorySchema]:
         """
@@ -122,13 +121,9 @@ class CategoryService:
         Returns:
             List of matching CategorySchema objects
         """
-        all_categories = self.dao.get_all()
         query_lower = query.lower()
-        filtered = [
-            cat for cat in all_categories 
-            if query_lower in cat.name.lower()
-        ]
-        return [self._to_schema(cat) for cat in filtered]
+        filtered = [cat for cat in self.dao.get_all() if query_lower in cat.name.lower()]
+        return self._to_schemas(filtered)
 
     def get_categories_with_products(self) -> List[CategorySchema]:
         """
@@ -137,9 +132,8 @@ class CategoryService:
         Returns:
             List of CategorySchema objects with products
         """
-        all_categories = self.dao.get_all()
-        filtered = [cat for cat in all_categories if cat.product_count > 0]
-        return [self._to_schema(cat) for cat in filtered]
+        filtered = [cat for cat in self.dao.get_all() if cat.product_count > 0]
+        return self._to_schemas(filtered)
 
     def get_categories_without_products(self) -> List[CategorySchema]:
         """
@@ -148,9 +142,8 @@ class CategoryService:
         Returns:
             List of CategorySchema objects without products
         """
-        all_categories = self.dao.get_all()
-        filtered = [cat for cat in all_categories if cat.product_count == 0]
-        return [self._to_schema(cat) for cat in filtered]
+        filtered = [cat for cat in self.dao.get_all() if cat.product_count == 0]
+        return self._to_schemas(filtered)
 
     @staticmethod
     def _to_schema(category: Optional[Category]) -> Optional[CategorySchema]:
@@ -158,3 +151,8 @@ class CategoryService:
         if category is None:
             return None
         return CategorySchema.model_validate(category)
+
+    @classmethod
+    def _to_schemas(cls, categories: List[Category]) -> List[CategorySchema]:
+        """Convert a list of categories to schemas."""
+        return [cls._to_schema(category) for category in categories]

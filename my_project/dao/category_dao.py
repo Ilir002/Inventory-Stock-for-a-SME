@@ -3,11 +3,12 @@
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 from typing import List, Optional
+from dao.base import ICategoryDAO
 from models.category import Category
-from models.validators import CategoryCreateRequest, CategoryUpdateRequest, CategorySchema
+from models.validators import CategoryCreateRequest, CategoryUpdateRequest
 
 
-class CategoryDAO:
+class CategoryDAO(ICategoryDAO):
     """Data Access Object for Category - handles database operations."""
 
     def __init__(self, db: Session):

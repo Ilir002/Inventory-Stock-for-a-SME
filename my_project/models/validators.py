@@ -1,15 +1,28 @@
 """Validation schemas for models."""
 
-from pydantic import BaseModel, Field, field_validator
-from typing import Optional
 from datetime import datetime
+from typing import Optional
+
+from pydantic import BaseModel, ConfigDict, Field, field_validator
+
+
+def _normalize_category_name(value: str) -> str:
+    """Normalize a category name before validation."""
+    normalized = value.strip()
+    if not normalized:
+        raise ValueError("Category name cannot be empty")
+    if len(normalized) < 2:
+        raise ValueError("Category name must be at least 2 characters")
+    return normalized
 
 
 class CategorySchema(BaseModel):
     """Pydantic schema for Category."""
 
+    model_config = ConfigDict(from_attributes=True)
+
     category_id: Optional[int] = None
-    name: str = Field(..., min_length=1, max_length=100)
+    name: str = Field(..., max_length=100)
     taxes: float = Field(..., ge=0.0, le=100.0)
     product_count: Optional[int] = None
     created_at: Optional[datetime] = None
@@ -19,13 +32,7 @@ class CategorySchema(BaseModel):
     @classmethod
     def validate_name(cls, v: str) -> str:
         """Validate category name."""
-        # Remove leading/trailing whitespace
-        v = v.strip()
-        if not v:
-            raise ValueError("Category name cannot be empty")
-        if len(v) < 2:
-            raise ValueError("Category name must be at least 2 characters")
-        return v
+        return _normalize_category_name(v)
 
     @field_validator("taxes")
     @classmethod
@@ -35,28 +42,23 @@ class CategorySchema(BaseModel):
             raise ValueError("Tax percentage must be between 0 and 100")
         return round(v, 2)
 
-    class Config:
-        """Pydantic config."""
-        from_attributes = True
-
-
 class CategoryCreateRequest(BaseModel):
     """Request schema for creating a category."""
 
-    name: str = Field(..., min_length=2, max_length=100)
+    name: str = Field(..., max_length=100)
     taxes: float = Field(default=0.0, ge=0.0, le=100.0)
 
     @field_validator("name")
     @classmethod
     def validate_name(cls, v: str) -> str:
         """Validate category name."""
-        return v.strip()
+        return _normalize_category_name(v)
 
 
 class CategoryUpdateRequest(BaseModel):
     """Request schema for updating a category."""
 
-    name: Optional[str] = Field(None, min_length=2, max_length=100)
+    name: Optional[str] = Field(None, max_length=100)
     taxes: Optional[float] = Field(None, ge=0.0, le=100.0)
 
     @field_validator("name")
@@ -64,5 +66,5 @@ class CategoryUpdateRequest(BaseModel):
     def validate_name(cls, v: Optional[str]) -> Optional[str]:
         """Validate category name."""
         if v is not None:
-            return v.strip()
+            return _normalize_category_name(v)
         return v

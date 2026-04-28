@@ -12,34 +12,34 @@ class ICategoryDAO(ABC):
     @abstractmethod
     def create(self, request: CategoryCreateRequest) -> Category:
         """Create a new category."""
-        pass
+        raise NotImplementedError
 
     @abstractmethod
     def get_by_id(self, category_id: int) -> Optional[Category]:
         """Get category by ID."""
-        pass
+        raise NotImplementedError
 
     @abstractmethod
     def get_by_name(self, name: str) -> Optional[Category]:
         """Get category by name."""
-        pass
+        raise NotImplementedError
 
     @abstractmethod
     def get_all(self) -> List[Category]:
         """Get all categories."""
-        pass
+        raise NotImplementedError
 
     @abstractmethod
     def update(self, category_id: int, request: CategoryUpdateRequest) -> Optional[Category]:
         """Update a category."""
-        pass
+        raise NotImplementedError
 
     @abstractmethod
     def delete(self, category_id: int) -> bool:
         """Delete a category."""
-        pass
+        raise NotImplementedError
 
     @abstractmethod
     def exists(self, name: str, exclude_id: Optional[int] = None) -> bool:
         """Check if category name exists."""
-        pass
+        raise NotImplementedError
