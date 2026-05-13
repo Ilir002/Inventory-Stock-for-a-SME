@@ -155,6 +155,57 @@ http://localhost:5000
 
 ---
 
+## 🧪 Testing
+
+Test mix:
+Overall 12 tests
+
+6 Unit tests:
+
+Subtotal calculation for multiple items
+
+Stock decrement after item sale
+
+Prevent negative stock levels
+
+Reorder threshold triggers alert below minimum stock
+
+Discount applied above CHF 50
+
+No discount at or below CHF 50
+
+3 DB tests:
+
+Product query returns seeded inventory items
+
+Saving a transaction persists transaction + line items correctly
+
+Empty DB returns no products and handles gracefully
+
+3 Integration tests:
+
+Selling one item updates stock and creates transaction record
+
+Selling multiple items applies discount and updates stock correctly
+
+Attempting to sell out-of-stock item returns error and no transaction created
+
+Template for writing test cases
+
+Test case ID – unique identifier (e.g., TC_001)
+Test case title/description – What is the test about?
+Preconditions – Requirements before executing the test
+Test steps – Actions to perform
+Test data/input
+Expected result
+Actual result
+Status – pass or fail
+Comments – Additional notes or defect found
+
+
+---
+
+
 ## 👥 Team & Contributions
 
 All team members contributed collaboratively to the project:
