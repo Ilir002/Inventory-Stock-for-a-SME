@@ -21,11 +21,11 @@ async def home() -> None:
         
         with ui.row().classes("gap-4 mt-8"):
             ui.button("View Categories", icon="list").on_click(
-                lambda: ui.navigate("/categories")
+                lambda: ui.open("/categories")
             ).props("outline").classes("px-8 py-3")
             
             ui.button("Add Category", icon="add", color="positive").on_click(
-                lambda: ui.navigate("/category/create")
+                lambda: ui.open("/category/create")
             ).classes("px-8 py-3")
 
 
@@ -52,5 +52,5 @@ def main() -> None:
     ui.run(title="Inventory Management", port=8080)
 
 
-if __name__ == "__main__":
+if __name__ in {"__main__", "__mp_main__"}:
     main()

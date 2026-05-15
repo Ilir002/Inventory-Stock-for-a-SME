@@ -29,8 +29,8 @@ class CategoryPages:
             # Header
             with ui.row().classes("w-full items-center justify-between"):
                 ui.label("Categories").classes("text-3xl font-bold")
-                ui.button("Add Category", icon="add", color="positive").on_click(
-                    lambda: ui.navigate("/category/create")
+                    ui.button("Add Category", icon="add", color="positive").on_click(
+                        lambda: ui.open("/category/create")
                 )
 
             # Search bar
@@ -74,7 +74,7 @@ class CategoryPages:
                                             icon="edit",
                                             color="primary",
                                         ).on_click(
-                                            lambda cid=category.category_id: ui.navigate(
+                                            lambda cid=category.category_id: ui.open(
                                                 f"/category/edit/{cid}"
                                             )
                                         ).props("flat")
@@ -140,7 +140,7 @@ class CategoryPages:
                         message_label.classes("text-green-600")
                         
                         # Navigate after success
-                        ui.timer(1.0, lambda: ui.navigate("/categories"))
+                            ui.timer(1.0, lambda: ui.open("/categories"))
 
                     except ValueError as e:
                         message_label.text = f"❌ {str(e)}"
@@ -192,7 +192,7 @@ class CategoryPages:
 
                 with ui.row().classes("gap-2"):
                     ui.button("Cancel", icon="close").on_click(
-                        lambda: ui.navigate("/categories")
+                            lambda: ui.open("/categories")
                     ).props("outlined")
 
                     async def update_category() -> None:
@@ -212,7 +212,7 @@ class CategoryPages:
                             message_label.classes("text-green-600")
                             
                             # Navigate after success
-                            ui.timer(1.0, lambda: ui.navigate("/categories"))
+                            ui.timer(1.0, lambda: ui.open("/categories"))
 
                         except ValueError as e:
                             message_label.text = f"❌ {str(e)}"
