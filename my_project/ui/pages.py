@@ -29,14 +29,13 @@ class CategoryPages:
             # Header
             with ui.row().classes("w-full items-center justify-between"):
                 ui.label("Categories").classes("text-3xl font-bold")
-                    ui.button("Add Category", icon="add", color="positive").on_click(
-                        lambda: ui.open("/category/create")
+                ui.button("Add Category", icon="add", color="positive").on_click(
+                    lambda: ui.open("/category/create")
                 )
 
             # Search bar
             search_input = ui.input(
                 placeholder="Search categories...",
-                icon="search",
             ).props("outlined").classes("w-full")
 
             # Categories container
@@ -120,7 +119,7 @@ class CategoryPages:
 
             with ui.row().classes("w-full justify-end gap-2"):
                 ui.button("Cancel", icon="close").on_click(
-                    lambda: ui.navigate("/categories")
+                    lambda: ui.open("/categories")
                 ).props("outlined")
 
                 async def save_category() -> None:
@@ -140,7 +139,7 @@ class CategoryPages:
                         message_label.classes("text-green-600")
                         
                         # Navigate after success
-                            ui.timer(1.0, lambda: ui.open("/categories"))
+                        ui.timer(1.0, lambda: ui.open("/categories"))
 
                     except ValueError as e:
                         message_label.text = f"❌ {str(e)}"
@@ -191,9 +190,9 @@ class CategoryPages:
                 )
 
                 with ui.row().classes("gap-2"):
-                    ui.button("Cancel", icon="close").on_click(
+                        ui.button("Cancel", icon="close").on_click(
                             lambda: ui.open("/categories")
-                    ).props("outlined")
+                        ).props("outlined")
 
                     async def update_category() -> None:
                         """Update category."""
