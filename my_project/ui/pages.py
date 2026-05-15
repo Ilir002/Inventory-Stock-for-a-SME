@@ -265,3 +265,31 @@ class CategoryPages:
                     ui.button("Delete", icon="delete", color="negative").on_click(confirm_delete)
 
         dialog.open()
+
+
+# Top-level NiceGUI page route for categories
+@ui.page('/categories')
+def categories_route() -> None:
+    """
+    Route handler for `/categories` that constructs the service and
+    delegates rendering to `CategoryPages.list_page()`.
+    """
+    # Lazy import to avoid circular imports at module import time
+    from database import init_db, SessionLocal
+    from dao.category_dao import CategoryDAO
+
+    # Ensure DB tables exist (safe to call repeatedly)
+    try:
+        init_db()
+    except Exception:
+        # ignore init errors in environments where DB isn't writable
+        pass
+
+    # Create a DAO and service instance for the page
+    db = SessionLocal()
+    dao = CategoryDAO(db)
+    service = CategoryService(dao)
+    pages = CategoryPages(service)
+
+    # Render the list page
+    pages.list_page()
