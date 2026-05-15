@@ -13,9 +13,33 @@ class MockCategoryDAO(ICategoryDAO):
     """Mock implementation of ICategoryDAO for testing."""
 
     def __init__(self):
-        """Initialize mock DAO with empty categories."""
+        """Initialize mock DAO with seeded categories for development."""
         self._categories: dict[int, Category] = {}
         self._next_id = 1
+
+        # Seed categories PASTA and WINE with 10 products each for UI preview
+        pasta = Category(
+            category_id=self._next_id,
+            name="PASTA",
+            taxes=10.0,
+            created_at=datetime.utcnow(),
+            updated_at=datetime.utcnow(),
+        )
+        # simulate 10 products
+        pasta.products = [None] * 10
+        self._categories[self._next_id] = pasta
+        self._next_id += 1
+
+        wine = Category(
+            category_id=self._next_id,
+            name="WINE",
+            taxes=20.0,
+            created_at=datetime.utcnow(),
+            updated_at=datetime.utcnow(),
+        )
+        wine.products = [None] * 10
+        self._categories[self._next_id] = wine
+        self._next_id += 1
 
     def create(self, request: CategoryCreateRequest) -> Category:
         """Create a new category."""

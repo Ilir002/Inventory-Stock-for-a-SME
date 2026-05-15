@@ -30,13 +30,8 @@ class CategoryPages:
             with ui.row().classes("w-full items-center justify-between"):
                 ui.label("Categories").classes("text-3xl font-bold")
                 ui.button("Add Category", icon="add", color="positive").on_click(
-                    lambda: ui.open("/category/create")
+                    lambda: ui.navigate.to("/category/create")
                 )
-
-            # Search bar
-            search_input = ui.input(
-                placeholder="Search categories...",
-            ).props("outlined").classes("w-full")
 
             # Categories container
             categories_container = ui.column().classes("w-full gap-2")
@@ -73,7 +68,7 @@ class CategoryPages:
                                             icon="edit",
                                             color="primary",
                                         ).on_click(
-                                            lambda cid=category.category_id: ui.open(
+                                            lambda cid=category.category_id: ui.navigate.to(
                                                 f"/category/edit/{cid}"
                                             )
                                         ).props("flat")
@@ -89,10 +84,11 @@ class CategoryPages:
             # Initial render
             render_categories()
 
-            # Search on input change
-            search_input.on_change(
-                lambda e: render_categories(e.value) if e.value else render_categories()
-            )
+            # Search input (use on_change param for NiceGUI)
+            search_input = ui.input(
+                placeholder="Search categories...",
+                on_change=lambda e: render_categories(e.value) if e.value else render_categories(),
+            ).props("outlined").classes("w-full")
 
     def create_page(self) -> None:
         """
@@ -119,7 +115,7 @@ class CategoryPages:
 
             with ui.row().classes("w-full justify-end gap-2"):
                 ui.button("Cancel", icon="close").on_click(
-                    lambda: ui.open("/categories")
+                    lambda: ui.navigate.to("/categories")
                 ).props("outlined")
 
                 async def save_category() -> None:
@@ -139,7 +135,7 @@ class CategoryPages:
                         message_label.classes("text-green-600")
                         
                         # Navigate after success
-                        ui.timer(1.0, lambda: ui.open("/categories"))
+                        ui.timer(1.0, lambda: ui.navigate.to("/categories"))
 
                     except ValueError as e:
                         message_label.text = f"❌ {str(e)}"
@@ -190,9 +186,9 @@ class CategoryPages:
                 )
 
                 with ui.row().classes("gap-2"):
-                        ui.button("Cancel", icon="close").on_click(
-                            lambda: ui.open("/categories")
-                        ).props("outlined")
+                    ui.button("Cancel", icon="close").on_click(
+                        lambda: ui.navigate.to("/categories")
+                    ).props("outlined")
 
                     async def update_category() -> None:
                         """Update category."""
@@ -211,7 +207,7 @@ class CategoryPages:
                             message_label.classes("text-green-600")
                             
                             # Navigate after success
-                            ui.timer(1.0, lambda: ui.open("/categories"))
+                            ui.timer(1.0, lambda: ui.navigate.to("/categories"))
 
                         except ValueError as e:
                             message_label.text = f"❌ {str(e)}"
